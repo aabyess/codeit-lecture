@@ -1,5 +1,4 @@
 # .github/workflows/actions.yml
-
 # 이름 짓기
 name: "Gitnub Actions 연습하기"
 # 언제 이 작업을 실행할지 정의
@@ -7,22 +6,20 @@ name: "Gitnub Actions 연습하기"
 on : push
 
 jobs :
-  push-job: 
+  test:
     runs-on: ubuntu-latest
-    steps: 
-      - name: 첫번째 작업
-        run: echo "첫번째 작업 실행중"       
-      - name: 여러문장 작업하기
-        run: |
-          echo "첫번째 작업 실행중"
-          echo "두번째 작업 실행중"
-      - name: github action 자체에 저장되어있는 변수 사용하기
-        run: |
-          echo $GITHUB_SHA
-          echo $GITHUB_REPOSITORY
-      - name: Github Actions Secret 변수 사용해보기
-        run: |
-          echo ${{ secrets.MY_NAME }}
-          echo ${{ secrets.MY_HOBBY }}
+    steps:
+      - name: Github Repository
+        uses: actions/checkout@v5 
 
+      - name: Node.js 설치
+        uses: actions/setup-node@v6
+        # 옵션: 노드 24 버전을 설치해
+        with:
+          node-version: 24
+      - name: 의존성 설치
+        run: npm ci
+
+      - name: 테스트 실행
+        run: npm run test
 
