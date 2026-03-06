@@ -12,4 +12,17 @@ jobs :
     steps: 
       - name: 첫번째 작업
         run: echo "첫번째 작업 실행중"       
+      - name: 여러문장 작업하기
+        run: |
+          echo "첫번째 작업 실행중"
+          echo "두번째 작업 실행중"
+      - name: github action 자체에 저장되어있는 변수 사용하기
+        run: |
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
+      - name: Github Actions Secret 변수 사용해보기
+        run: |
+          echo ${{ secrets.MY_NAME }}
+          echo ${{ secrets.MY_HOBBY }}
+
 
